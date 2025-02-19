@@ -1,0 +1,12 @@
+server:
+  port: 8091 # Port number
+
+spring:
+  application:
+    name: filmes-legendary-video-library # Application name
+  jackson:
+    property-naming-strategy: SNAKE_CASE # insert snake_case in JSON
+
+log4j2:
+  formatMsgNoLookups: true # Remove lookups from log messages vulnerability
+
