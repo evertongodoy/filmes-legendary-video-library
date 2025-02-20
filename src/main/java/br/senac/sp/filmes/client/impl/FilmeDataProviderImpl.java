@@ -29,16 +29,17 @@ public class FilmeDataProviderImpl implements FilmeDataprovider {
         var webClient = webClientBuilder.baseUrl(LEGENDARY_VIDEO_LIBRARY_BASE_URL).build();
 
         var response = webClient.get()
-                .uri(RECUPERAR_TODOS_URI)
-                .retrieve()
-                .bodyToMono(ResponseLegendaryVideoModel.class)
-                .block();
+                .uri(RECUPERAR_TODOS_URI) // uri() is used to set the endpoint
+                .retrieve() // retrieve() is used to get the response
+                .bodyToMono(ResponseLegendaryVideoModel.class) // bodyToMono() is used to convert the response to a Mono
+                .block(); // block() is used to wait for the response
         if(Objects.isNull(response)){
             return List.of();
         }
         return FilmesVideoClientMapper.INSTANCE.listLegendaryVideoToListFilmesLegendaryVideo(
                 response.getLegendaryVideos()
         );
+
     }
 
 }
