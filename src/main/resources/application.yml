@@ -10,3 +10,6 @@ spring:
 log4j2:
   formatMsgNoLookups: true # Remove lookups from log messages vulnerability
 
+jwt:
+  secret-key: U2VjcmV0S2V5QFRlY25pY29FbUluZm9ybWF0aWNhU2VuYWMyMDI1
+  expiration-ms: 600000  # 5 min = 300000

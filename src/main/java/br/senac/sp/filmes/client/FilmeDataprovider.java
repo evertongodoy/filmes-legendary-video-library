@@ -9,6 +9,6 @@ public interface FilmeDataprovider {
     String LEGENDARY_VIDEO_LIBRARY_BASE_URL = "http://localhost:8090";
     String RECUPERAR_TODOS_URI = "/videos/recuperar/todos";
 
-    List<FilmesLegendaryVideoModel> recuperarTodos();
+    List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario);
 
 }

@@ -86,6 +86,13 @@
 			<version>${spring-boot-starter-webflux.version}</version>
 		</dependency>
 
+		<!-- Tokens -->
+		<dependency>
+			<groupId>br.senac.sp.security.tokens</groupId>
+			<artifactId>security-tokens</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

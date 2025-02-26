@@ -21,9 +21,9 @@ public class FilmesLegendaryVideoUseCaseImpl implements FilmesLegendaryVideoUseC
     }
 
     @Override
-    public List<FilmesLegendaryVideoModel> recuperarTodos() {
+    public List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario) {
         logger.info("[FilmesLegendaryVideoUseCaseImpl]-[recuperarTodos] - Recuperando todos os filmes no webservice!");
-        return filmeDataprovider.recuperarTodos();
+        return filmeDataprovider.recuperarTodos(usuario);
     }
 
 }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +23,9 @@ public class FilmesLegendaryVideoController {
     }
 
     @GetMapping(value = "/library/recuperar/todos")
-    public ResponseEntity<FilmesLegendaryVideoResponse> recuperarTodos() {
+    public ResponseEntity<FilmesLegendaryVideoResponse> recuperarTodos(@RequestHeader(value = "subject") String usuario) {
         logger.info("[FilmesLegendaryVideoController]-[recuperarTodos] - Recuperando todos os filmes no webservice!");
-        var models = filmesLegendaryVideoUseCase.recuperarTodos();
+        var models = filmesLegendaryVideoUseCase.recuperarTodos(usuario);
         return ResponseEntity.ok().body(
                 new FilmesLegendaryVideoResponse().setLegendaryVideos(models)
         );

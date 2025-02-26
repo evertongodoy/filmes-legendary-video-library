@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface FilmesLegendaryVideoUseCase {
 
-    List<FilmesLegendaryVideoModel> recuperarTodos();
+    List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario);
 
 }
