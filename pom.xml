@@ -17,6 +17,10 @@
 
 	<properties>
 		<java.version>17</java.version>
+		<!-- Define a codificação usada pelo compilador Java. -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Define a codificação para relatórios gerados pelo Maven. -->
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<log4j-core.version>2.24.3</log4j-core.version>
 		<log4j-api.version>2.24.3</log4j-api.version>
 		<mapstruct-processor.version>1.6.3</mapstruct-processor.version>
