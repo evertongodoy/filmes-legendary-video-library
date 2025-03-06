@@ -6,10 +6,22 @@ spring:
     name: filmes-legendary-video-library # Application name
   jackson:
     property-naming-strategy: SNAKE_CASE # insert snake_case in JSON
+  kafka:
+    bootstrap-servers: localhost:29092 # localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      properties:
+        linger.ms: 10
+        delivery.timeout.ms: 300000 # 5 minutos
+        request.timeout.ms: 20000
+        max.block.ms: 60000
 
+# Log4j format messages without lookups
 log4j2:
   formatMsgNoLookups: true # Remove lookups from log messages vulnerability
 
+# JWT configuration
 jwt:
   secret-key: U2VjcmV0S2V5QFRlY25pY29FbUluZm9ybWF0aWNhU2VuYWMyMDI1
   expiration-ms: 600000  # 5 min = 300000

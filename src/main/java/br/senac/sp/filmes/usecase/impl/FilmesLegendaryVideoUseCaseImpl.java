@@ -5,6 +5,7 @@ import br.senac.sp.filmes.models.FilmesLegendaryVideoModel;
 import br.senac.sp.filmes.usecase.FilmesLegendaryVideoUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +16,24 @@ public class FilmesLegendaryVideoUseCaseImpl implements FilmesLegendaryVideoUseC
     private static final Logger logger = LogManager.getLogger(FilmesLegendaryVideoUseCaseImpl.class);
 
     private final FilmeDataprovider filmeDataprovider;
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public FilmesLegendaryVideoUseCaseImpl(FilmeDataprovider filmeDataprovider) {
+    public FilmesLegendaryVideoUseCaseImpl(FilmeDataprovider filmeDataprovider,
+                                           KafkaTemplate<String, String> kafkaTemplate) {
         this.filmeDataprovider = filmeDataprovider;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     @Override
     public List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario) {
         logger.info("[FilmesLegendaryVideoUseCaseImpl]-[recuperarTodos] - Recuperando todos os filmes no webservice!");
         return filmeDataprovider.recuperarTodos(usuario);
+    }
+
+    @Override
+    public void enviarParaKafka(final String topico, final String mensagem) {
+        logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Enviando mensagem para o topico {}", topico);
+        kafkaTemplate.send(topico, mensagem);
     }
 
 }

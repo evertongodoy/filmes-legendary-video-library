@@ -7,5 +7,6 @@ import java.util.List;
 public interface FilmesLegendaryVideoUseCase {
 
     List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario);
+    void enviarParaKafka(final String topico, final String mensagem);
 
 }
