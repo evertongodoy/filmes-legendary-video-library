@@ -1,7 +1,9 @@
 package br.senac.sp.filmes.controller;
 
+import br.senac.sp.filmes.controller.mapper.KafkaMessageMapper;
 import br.senac.sp.filmes.controller.request.FilmesLegendaryVideoRequest;
 import br.senac.sp.filmes.controller.response.FilmesLegendaryVideoResponse;
+import br.senac.sp.filmes.models.KafkaMessageLegendaryVideoModel;
 import br.senac.sp.filmes.usecase.FilmesLegendaryVideoUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,7 +35,8 @@ public class FilmesLegendaryVideoController {
     @PostMapping(value = "publicar-solicitacao-videos")
     public ResponseEntity<String> publicarSolicitacaoVideos(@RequestBody FilmesLegendaryVideoRequest request) {
         logger.info("[FilmesLegendaryVideoController]-[publicarSolicitacaoVideos] - Publicando solicitação de vídeos!");
-        filmesLegendaryVideoUseCase.enviarParaKafka(request.getTopico(), request.getMensagem());
+        var kafkaMessageVideoModel = KafkaMessageMapper.INSTANCE.toModel(request);
+        filmesLegendaryVideoUseCase.enviarParaKafka(kafkaMessageVideoModel);
         return ResponseEntity.ok().body("Solicitação de vídeos publicada com sucesso!");
     }
 

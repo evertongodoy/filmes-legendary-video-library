@@ -20,3 +20,4 @@ Use kafka:9092:
 spring:
   kafka:
     bootstrap-servers: kafka:9092
+
