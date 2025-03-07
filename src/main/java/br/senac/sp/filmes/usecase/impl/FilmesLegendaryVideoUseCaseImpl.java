@@ -42,17 +42,15 @@ public class FilmesLegendaryVideoUseCaseImpl implements FilmesLegendaryVideoUseC
     public void enviarParaKafka(final KafkaMessageLegendaryVideoModel kafkaMessageLegendaryVideoModel) {
         logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Enviando mensagem para o topico {}",
                 kafkaMessageLegendaryVideoModel.getTopico());
-
         var key = UUID.randomUUID().toString();
-
-        // Converter o objeto para JSON
         try {
+            logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Convertendo para JSON");
             var json = objectMapper.writeValueAsString(kafkaMessageLegendaryVideoModel);
 
-            // Criar ProducerRecord com chave e valor JSON
+            logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Criar ProducerRecord com chave e valor JSON");
             ProducerRecord<String, String> record = new ProducerRecord<>(kafkaMessageLegendaryVideoModel.getTopico(), key, json);
 
-            // Enviar mensagem para o Kafka
+            logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Enviar mensagem para o Kafka");
             kafkaTemplate.send(record).whenComplete((result, ex) -> {
                 if (ex == null) {
                     logger.info("[FilmesLegendaryVideoUseCaseImpl]-[enviarParaKafka] - Sucesso, mensagem {} enviada no topico {}",
@@ -64,7 +62,6 @@ public class FilmesLegendaryVideoUseCaseImpl implements FilmesLegendaryVideoUseC
 
         } catch (JsonProcessingException e) {
             logger.info("[FilmesLegendaryVideoUseCaseImpl]-[JsonProcessingException] - Erro ao serializar objeto para JSON {}", e.getMessage());
-            throw new RuntimeException(e);
         }
     }
 

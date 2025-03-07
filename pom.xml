@@ -103,17 +103,20 @@
 			<artifactId>spring-kafka</artifactId>
 			<version>3.3.3</version>
 		</dependency>
-		<!-- Kafka Clients para utilizar o Producer Record -->
-<!--		<dependency>-->
-<!--			<groupId>org.apache.kafka</groupId>-->
-<!--			<artifactId>kafka-clients</artifactId>-->
-<!--			<version>3.9.0</version>-->
-<!--		</dependency>-->
+
 		<!-- Dependência para suporte a JSON (opcional, se você for serializar/deserializar objetos JSON) -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.18.3</version>
+		</dependency>
+
+		<!-- Dependência para suporte a JSON (opcional, se você for serializar/deserializar objetos JSON) -->
+		<!-- erro: JSON Java 8 date/time type java.time.LocalDate not supported by default: add Module "com.fasterxml.jackson.datatype:jackson-datatype-jsr310" to enable handling-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.15.0</version>
 		</dependency>
 
 	</dependencies>

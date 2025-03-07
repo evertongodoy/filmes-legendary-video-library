@@ -16,6 +16,16 @@ spring:
         delivery.timeout.ms: 300000 # 5 minutos
         request.timeout.ms: 20000
         max.block.ms: 60000
+    consumer:
+      group-id: filmes-consumer-group # VERIFICAR COMO PRODUZIR PARA O MESMO GRUPO
+      auto-offset-reset: earliest
+      enable-auto-commit: false  # Desativa o auto commit, O Kafka não confirmará mensagens automaticamente.
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+    listener:
+      ack-mode: manual # Configura ACK manual, Permite confirmar as mensagens explicitamente.
 
 # Log4j format messages without lookups
 log4j2:
