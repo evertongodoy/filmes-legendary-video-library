@@ -32,7 +32,7 @@ public class FilmesLegendaryVideoController {
         );
     }
 
-    @PostMapping(value = "publicar-solicitacao-videos")
+    @PostMapping(value = "/publicar-solicitacao-videos")
     public ResponseEntity<String> publicarSolicitacaoVideos(@RequestBody FilmesLegendaryVideoRequest request) {
         logger.info("[FilmesLegendaryVideoController]-[publicarSolicitacaoVideos] - Publicando solicitação de vídeos!");
         var kafkaMessageVideoModel = KafkaMessageMapper.INSTANCE.toModel(request);

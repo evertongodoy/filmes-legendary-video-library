@@ -9,19 +9,19 @@ spring:
   kafka:
     bootstrap-servers: localhost:29092 # localhost:9092
     producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer # Serializador da chave
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer #org.apache.kafka.common.serialization.StringSerializer
       properties:
-        linger.ms: 10
+        linger.ms: 10 # 10 milissegundos
         delivery.timeout.ms: 300000 # 5 minutos
-        request.timeout.ms: 20000
-        max.block.ms: 60000
+        request.timeout.ms: 20000 # 20 segundos
+        max.block.ms: 60000 # 60 segundos
     consumer:
-      group-id: filmes-consumer-group # VERIFICAR COMO PRODUZIR PARA O MESMO GRUPO
-      auto-offset-reset: earliest
+      group-id: video-consumer-group # Grupo de consumidores
+      auto-offset-reset: earliest # Configura o offset para o início do tópico
       enable-auto-commit: false  # Desativa o auto commit, O Kafka não confirmará mensagens automaticamente.
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer # Deserializador da chave
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer # Deserializador do valor
       properties:
         spring.json.trusted.packages: "*"
     listener:
