@@ -7,6 +7,7 @@ import br.senac.sp.filmes.models.FilmesLegendaryVideoModel;
 import br.senac.sp.security.tokens.application.usecase.GenerateTokenUseCase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -31,10 +32,11 @@ public class FilmeDataProviderImpl implements FilmeDataprovider {
     }
 
     @Override
-    public List<FilmesLegendaryVideoModel> recuperarTodos(final String usuario) {
+    @Cacheable(value = "lista-filmes-cache-usuario", key = "#user", unless = "#result == null or #result.isEmpty()")
+    public List<FilmesLegendaryVideoModel> recuperarTodos(final String user) {
         logger.info("[FilmeDataProviderImpl]-[recuperarTodos] - Recuperando todos os filmes no webservice!");
         var webClient = webClientBuilder.baseUrl(LEGENDARY_VIDEO_LIBRARY_BASE_URL).build();
-        var token = this.generateTokenUseCase.execute(usuario);
+        var token = this.generateTokenUseCase.execute(user);
 
         var response = webClient.get()
                 .uri(RECUPERAR_TODOS_URI) // uri() is used to set the endpoint
