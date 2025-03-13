@@ -2,10 +2,11 @@
 Serviço para fazer o consumo dos end-points do serviço legendary-video-library e envia mensagens Kafka para solicitar a lista de filmes.
 Esse projeto é o inicio do processo. Uma requisição sincrona HTTP pode ser realizada para recuperar a lista de filmes, ou uma mensagem Kafka pode ser enviada para solicitar a lista de filmes de forma assincrona.
 
-# Esse projeto está dividido em 3 branches.
+# Esse projeto está dividido em 4 branches.
 * **consumo-legendary-video-library-normal &rarr;** Faz requisição HTTP [GET] `/library/recuperar/todos` para o micro-serviço **legendary-video-library** para recuperar uma lista de filmes. Não há restrições de acesso pois o GetMapping está aberto para todos. Na prática é a mais simples entre as 3.
 * **consumo-legendary-video-library-token &rarr;** Faz requisição HTTP [GET] `/library/recuperar/todos` para o micro-serviço **legendary-video-library** para recuperar uma lista de filmes. Possui dependência externa com o projeto que gera e valida tokens.
 * **consumo-legendary-video-library-token-kafka &rarr;** Herda as mesmas necessidades da branch **consumo-legendary-video-library-token** A partir desse momento temos uma requisição HTTP [POST] `/publicar-solicitacao-videos` para publicar uma mensagem no tópico `solicita-videos-library` que será lido pelo projeto **legendary-video-library** e devolverá uma lista de filmes no tópico **devolve-videos-library** que será consumido por esse projeto. Foi criado o consumer **ConsumerMessage** que faz a leitura do topico ***devolve-videos-library***. Até o presente momento não necessiade de chaves para ler e escrever nos topicos do Kafka.
+* **consumo-legendary-video-library-token-kafka-redis &rarr;** Herda as mesmas necessidades da branch **consumo-legendary-video-library-token** A partir desse momento foi adicionado um Cache REDIS de 2 minutos `Duration.ofMinutes(2)` ao recuperar a lista de filmes no `get` do projeto `legendary-video-library`.
 
 # Pre-requisitos para rodar o projeto
 1. **Docker Desktop** deve estar instalado no seu computador.
@@ -47,16 +48,16 @@ Esse jar será utilizado para validar o token gerado pelo projeto **security-tok
 * **application.yml**
 ```yml
 spring:
-  kafka:
-    bootstrap-servers: localhost:29092
+   kafka:
+      bootstrap-servers: localhost:29092
 ```
 
 * Se a aplicação Java estiver rodando DENTRO do Docker
 * **application.yml**
 ```yml
 spring:
-  kafka:
-    bootstrap-servers: kafka:9092
+   kafka:
+      bootstrap-servers: kafka:9092
 ```
 
 Isso acontece porque dentro do Docker, o Kafka escuta na porta 9092, mas para acesso externo (como sua aplicação rodando no host/computador local), ele precisa ser acessado via localhost:29092.
