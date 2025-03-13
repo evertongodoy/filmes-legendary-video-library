@@ -56,11 +56,14 @@ spring:
 * **application.yml**
 ```yml
 spring:
-   kafka:
-      bootstrap-servers: kafka:9092
+  kafka:
+    bootstrap-servers: kafka:9092
 ```
 
 Isso acontece porque dentro do Docker, o Kafka escuta na porta 9092, mas para acesso externo (como sua aplicação rodando no host/computador local), ele precisa ser acessado via localhost:29092.
 
 # Acesso ao Kafka-UI
 1. Abra o navegador e acesse `http://localhost:7085/ui/`.
+
+# Acesso ao Redis-Commander
+1. Abra o navegador e acesse `http://localhost:7095/`.
