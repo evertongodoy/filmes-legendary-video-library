@@ -64,3 +64,6 @@ Isso acontece porque dentro do Docker, o Kafka escuta na porta 9092, mas para ac
 
 # Acesso ao Kafka-UI
 1. Abra o navegador e acesse `http://localhost:7085/ui/`.
+
+# Acesso ao Redis-Commander
+1. Abra o navegador e acesse `http://localhost:7095/`.
