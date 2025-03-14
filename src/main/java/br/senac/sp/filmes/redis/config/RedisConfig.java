@@ -35,7 +35,7 @@ public class RedisConfig {
                 .registerModule(new ParameterNamesModule());
 
         return RedisCacheConfiguration.defaultCacheConfig()
-                .entryTtl(Duration.ofMinutes(2)) // Expiração de 2 minutos
+                .entryTtl(Duration.ofMinutes(15)) // Expiração de 2 minutos
                 .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(
                         new GenericJackson2JsonRedisSerializer(objectMapper)));
     }
