@@ -48,8 +48,8 @@ Esse jar será utilizado para validar o token gerado pelo projeto **security-tok
 * **application.yml**
 ```yml
 spring:
-  kafka:
-    bootstrap-servers: localhost:29092
+   kafka:
+      bootstrap-servers: localhost:29092
 ```
 
 * Se a aplicação Java estiver rodando DENTRO do Docker
@@ -64,6 +64,27 @@ Isso acontece porque dentro do Docker, o Kafka escuta na porta 9092, mas para ac
 
 # Acesso ao Kafka-UI
 1. Abra o navegador e acesse `http://localhost:7085/ui/`.
+
+
+# Representação básica da comunição dos microserviços e tópicos
+
+```mermaid
+---
+config:
+  theme: dark
+---
+sequenceDiagram
+    participant FilmesService as filmes-legendary-video-library
+    participant KafkaSolicita as Topic: solicita-videos-library
+    participant LegendaryService as legendary-video-library
+    participant KafkaDevolve as Topic: devolve-videos-library
+    FilmesService->>KafkaSolicita: Publica solicitação de vídeos
+    LegendaryService-->>KafkaSolicita: Lê mensagem do tópico (consome)
+    LegendaryService->>LegendaryService: Processa solicitação e busca filmes
+    LegendaryService->>KafkaDevolve: Publica lista de filmes
+    FilmesService-->>KafkaDevolve: Lê mensagem do tópico (consome)
+
+```
 
 # Acesso ao Redis-Commander
 1. Abra o navegador e acesse `http://localhost:7095/`.
