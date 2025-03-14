@@ -68,7 +68,7 @@ Isso acontece porque dentro do Docker, o Kafka escuta na porta 9092, mas para ac
 
 # Representação básica da comunição dos microserviços e tópicos
 
-```
+```mermaid
 ---
 config:
   theme: dark
