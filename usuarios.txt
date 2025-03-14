@@ -1,0 +1,7 @@
+senac listar-filmes, editar-filmes, deletar-filmes
+everton listar-filmes
+joao listar-filmes, editar-filmes
+maria listar-filmes
+kevin jogar-counter-striker
+francisco listar-filmes
+kerolayne listar-filmes
